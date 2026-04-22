@@ -1,2 +1,0 @@
-# flashcard
-belajar dengan flashcard
