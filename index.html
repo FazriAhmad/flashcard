@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shiritori Zen | Survival Multiplayer</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Noto+Sans+JP:wght@400;700;900&display=swap"
+    rel="stylesheet">
+</head>
+
+<body>
+  <div class="app-container">
+    <!-- Splash Screen -->
+    <div id="splash-screen" class="overlay active">
+      <div class="glass-card main-menu animate-in">
+        <h1>しりとり</h1>
+        <p class="subtitle">SHIRITORI ZEN: MULTIPLAYER</p>
+
+        <div class="menu-section">
+          <p class="p-label">PILIH AKSARA</p>
+          <div class="toggle-group" id="script-toggle">
+            <button class="toggle-btn active" data-script="hiragana">HIRAGANA</button>
+            <button class="toggle-btn" data-script="katakana">KATAKANA</button>
+          </div>
+        </div>
+
+        <div class="menu-section" style="margin-top: 20px;">
+          <p class="p-label">PILIH MODE</p>
+          <div style="display: flex; flex-direction: column; gap: 10px;">
+            <button class="primary-btn" id="start-ai">VS COMPUTER</button>
+            <button class="primary-btn" id="start-pvp"
+              style="background: var(--jp-black); border-bottom-color: #000;">PLAYER VS PLAYER</button>
+          </div>
+        </div>
+
+        <div class="rules-box"
+          style="margin-top: 20px; font-size: 0.8rem; color: #777; text-align: left; padding: 15px; background: #f9f9f9; border-radius: 10px;">
+          <p>• 45 detik per giliran</p>
+          <p>• Masing-masing 5 nyawa</p>
+          <p>• Salah/Waktu habis = -1 Nyawa & pindah giliran</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Game Interface -->
+    <div id="game-interface" class="game-area">
+      <header class="game-header">
+        <div class="header-stats-left">
+          <div class="player-info p2" id="ai-info">
+            <span class="p-label" id="p2-label">Musuh (AI)</span>
+            <div style="display: flex; gap: 15px; justify-content: center;">
+              <div><small>NYAWA:</small> <span id="p2-chances" class="val">5</span></div>
+              <div><small>SKOR:</small> <span id="p2-score" class="val">0</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="timer-container" id="timer-box">
+          <span class="instruction">TIME</span>
+          <span id="timer-val">45</span>
+        </div>
+
+        <div class="header-stats-right">
+          <div class="player-info p1" id="user-info">
+            <span class="p-label">PLAYER 1</span>
+            <div style="display: flex; gap: 15px; justify-content: center;">
+              <div><small>NYAWA:</small> <span id="p1-chances" class="val">5</span></div>
+              <div><small>SKOR:</small> <span id="p1-score" class="val">0</span></div>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <main class="game-main">
+        <div class="history-section">
+          <div class="section-header">RIWAYAT KATA</div>
+          <div class="history-track" id="history-list"></div>
+        </div>
+
+        <div class="board-section">
+          <div class="center-board">
+            <div class="last-word-box">
+              <span class="instruction">KATA TERAKHIR</span>
+              <div id="last-word-display">-</div>
+              <div id="last-meaning-display">Tunggu input...</div>
+            </div>
+            <div class="target-indicator">
+              <span class="instruction">AWALAN</span>
+              <h2 id="target-char">?</h2>
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <footer class="game-footer">
+        <div class="input-section">
+          <input type="text" id="word-input" placeholder="Ketik kata di sini..." autocomplete="off" spellcheck="false">
+          <button id="submit-word" class="submit-btn">KIRIM</button>
+        </div>
+        <button id="quit-btn"
+          style="margin-top: 10px; background: none; border: none; color: #777; cursor: pointer; font-weight: 700; width: 100%;">KELUAR
+          KE MENU</button>
+      </footer>
+    </div>
+
+    <!-- Game Over Modal -->
+    <div id="game-over-modal" class="overlay">
+      <div class="glass-card modal animate-in">
+        <h2 style="color: #BC002D; font-size: 2.5rem;">GAME OVER</h2>
+        <p id="game-over-reason" style="margin: 10px 0; font-weight: 700;"></p>
+        <div class="modal-stats" id="final-stats-p1">
+          <p class="p-label">PLAYER 1</p>
+          <span class="stat-val" id="final-score-p1">0</span>
+        </div>
+        <div class="modal-stats" id="final-stats-p2">
+          <p class="p-label" id="p2-final-label">PLAYER 2 / AI</p>
+          <span class="stat-val" id="final-score-p2">0</span>
+        </div>
+        <button class="primary-btn" id="restart-btn">MAIN LAGI</button>
+        <button class="text-btn" id="menu-btn">MENU UTAMA</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+
+</html>

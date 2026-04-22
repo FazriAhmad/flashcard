@@ -1,0 +1,125 @@
+/* Survival Multiplayer Styles */
+:root {
+    --jp-red: #BC002D;
+    --jp-gold: #D4AF37;
+    --jp-black: #1a1a1a;
+    --jp-white: #fdfdfd;
+    --jp-cream: #f4ece1;
+    --text-dark: #2d2d2d;
+    --glass: rgba(255, 255, 255, 0.9);
+    --danger: #d63031;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    font-family: 'Inter', 'Noto Sans JP', sans-serif;
+    background-color: var(--jp-cream);
+    color: var(--text-dark);
+    height: 100vh;
+    overflow: hidden;
+}
+
+.app-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background-image: url('traditional_japanese_background_1776839778193.png');
+    background-size: cover;
+    background-position: center;
+    display: flex; justify-content: center; align-items: center;
+}
+
+.glass-card {
+    background: var(--glass);
+    border: 3px solid var(--jp-red);
+    border-radius: 20px; padding: 40px; width: 90%; max-width: 480px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.2); text-align: center; position: relative;
+}
+
+.overlay {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(255, 255, 255, 0.85); display: none; justify-content: center; align-items: center; z-index: 100;
+}
+.overlay.active { display: flex; }
+
+h1 { font-size: 3rem; color: var(--jp-red); font-weight: 900; }
+.subtitle { color: var(--jp-gold); font-weight: 700; margin-bottom: 30px; font-size: 0.9rem; border-bottom: 2px solid var(--jp-gold); display: inline-block; }
+
+.primary-btn {
+    width: 100%; padding: 18px; background: var(--jp-red); color: white;
+    border: none; border-radius: 5px; font-size: 1.1rem; font-weight: 800;
+    cursor: pointer; transition: 0.3s; border-bottom: 4px solid #80001e;
+}
+.primary-btn:hover { transform: translateY(-2px); }
+
+/* Game Area */
+.game-area {
+    width: 100%; max-width: 1300px; height: 100vh;
+    display: flex; flex-direction: column; padding: 15px;
+    opacity: 0; pointer-events: none; transition: 0.5s;
+}
+.game-area.active { opacity: 1; pointer-events: auto; }
+
+.game-header {
+    display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 15px; margin-bottom: 15px;
+}
+
+.timer-container {
+    background: var(--jp-black); color: white; border: 3px solid var(--jp-gold);
+    width: 90px; height: 90px; border-radius: 50%;
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+}
+#timer-val { font-size: 2rem; font-weight: 900; line-height: 1; }
+
+.player-info {
+    padding: 10px 20px; background: white; border: 2px solid #ddd; border-radius: 10px;
+    text-align: center; transition: 0.3s;
+}
+.player-info.active { border-color: var(--jp-red); background: #fff5f5; box-shadow: 0 5px 15px rgba(188, 0, 45, 0.2); }
+.p-label { font-size: 0.7rem; color: #777; font-weight: 800; display: block; margin-bottom: 5px; }
+.val { font-weight: 900; color: var(--jp-red); font-size: 1.1rem; }
+small { font-size: 0.6rem; color: #999; }
+
+/* Main Layout */
+.game-main {
+    flex: 1; display: grid; grid-template-columns: 320px 1fr; gap: 15px; overflow: hidden;
+}
+
+.history-section {
+    background: white; border: 2px solid var(--jp-red); border-radius: 12px;
+    display: flex; flex-direction: column; overflow: hidden;
+}
+.section-header { background: var(--jp-red); color: white; padding: 10px; font-weight: 800; text-align: center; font-size: 0.8rem; }
+.history-track { flex: 1; overflow-y: auto; padding: 10px; display: flex; flex-direction: column-reverse; gap: 8px; }
+.history-item { padding: 8px 12px; background: #f9f9f9; border-radius: 6px; border-left: 4px solid var(--jp-red); font-size: 0.9rem; }
+.history-item.system { color: #d63031; font-weight: 700; border-left-color: #d63031; background: #fff5f5; }
+
+.board-section {
+    background: rgba(255, 255, 255, 0.9); border: 2px solid var(--jp-gold); border-radius: 12px;
+    display: flex; flex-direction: column; justify-content: center; align-items: center; position: relative;
+}
+#last-word-display { font-size: 2.8rem; font-weight: 900; color: var(--jp-black); }
+#last-meaning-display { color: var(--jp-gold); font-weight: 700; font-size: 1.1rem; }
+.target-indicator { margin-top: 10px; border: 2px dashed var(--jp-red); padding: 10px; border-radius: 50%; width: 130px; height: 130px; display: flex; flex-direction: column; justify-content: center; align-items: center; }
+#target-char { font-size: 4.5rem; font-weight: 900; color: var(--jp-red); line-height: 1; }
+
+.game-footer { padding-top: 15px; }
+.input-section {
+    background: white; border: 3px solid var(--jp-red); border-radius: 12px; padding: 12px 20px; display: flex; gap: 15px; align-items: center;
+}
+#word-input { flex: 1; border: none; font-size: 1.3rem; outline: none; font-family: 'Noto Sans JP', sans-serif; font-weight: 700; }
+.submit-btn { background: var(--jp-red); color: white; border: none; padding: 10px 20px; border-radius: 5px; font-weight: 800; cursor: pointer; }
+
+.timer-warning { color: #ff7675; animation: blink 0.5s infinite; }
+@keyframes blink { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
+
+.modal-stats { margin-top: 15px; padding: 10px; background: #eee; border-radius: 10px; }
+.stat-val { font-size: 1.5rem; font-weight: 900; color: var(--jp-red); }
+
+@media (max-width: 768px) {
+    .game-main { grid-template-columns: 1fr; }
+    .history-section { display: none; }
+    .game-header { grid-template-columns: 1fr auto; }
+    .header-stats-left { display: none; }
+}
